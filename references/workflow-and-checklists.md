@@ -14,7 +14,11 @@ Use this guide to run refactoring as a controlled loop instead of a big rewrite.
 
 - Apply the smallest behavior-preserving step possible.
 - Run targeted tests immediately after each micro-step.
-- Keep commits narrow and intention-revealing.
+- Repeat micro-step + test until one complete refactor reaches its structural goal.
+- Run refactor-level tests before commit (at least targeted coverage for impacted code; include broader regression when available).
+- Commit immediately after refactor-level tests pass.
+- Keep each commit limited to one completed refactor; never batch multiple completed refactors together.
+- Use commit message format `[refactor]: xxx` (for example, `[refactor]: extract pricing calculator`).
 - Prefer renaming, extraction, and encapsulation before architecture-heavy changes.
 - Remove duplication and ambiguity before introducing new abstractions.
 - Pause if tests become flaky; stabilize feedback before proceeding.

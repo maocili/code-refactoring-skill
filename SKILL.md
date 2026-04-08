@@ -11,13 +11,17 @@ Use this skill to plan and execute small, safe refactors inspired by Fowler-styl
 
 ## Refactoring Workflow
 
-1. Define the target behavior and lock it with self-checking tests before changing structure.
-2. Select one smell or pain point that blocks changeability now.
-3. Choose the smallest safe refactoring that improves that exact pain point.
-4. Apply one micro-step, then run the relevant tests immediately.
-5. Commit only coherent structural changes with clear intent in the message.
-6. Repeat until the code becomes easy enough for the feature or bug-fix change.
-7. Stop when further cleanup gives low value compared with delivery needs.
+Before entering the loop, lock current behavior with self-checking tests and choose one concrete smell to address.
+
+Use this fixed loop for each refactor:
+
+1. Apply one micro-step toward the active refactor.
+2. Run relevant tests immediately after that micro-step.
+3. Repeat steps 1-2 until one complete refactor reaches its structural goal.
+4. Test the completed refactor before commit (at least targeted tests for affected code; include higher-level regression when available).
+5. Commit exactly that one completed refactor with message format `[refactor]: xxx` (for example, `[refactor]: extract pricing calculator`, `[refactor]: rename payment state mapper`).
+
+Do not batch multiple completed refactors into one commit. Start the loop again for the next refactor, and stop when further cleanup gives low value compared with delivery needs.
 
 ## Smell Triage
 
@@ -45,6 +49,9 @@ Use this sequence unless the codebase constraints force a different order.
 - Preserve behavior during refactor steps; avoid mixing refactoring with feature logic.
 - Keep each step small enough to isolate regressions quickly.
 - Run tests after every micro-change, not only at the end.
+- Treat a refactor as complete only when its structural goal is done and refactor-level tests pass.
+- Commit one completed refactor per commit; never combine multiple completed refactors.
+- Use commit messages in the exact format `[refactor]: xxx`.
 - Maintain a rollback path through frequent commits and narrow scope.
 - Avoid large-batch rewrites that hide intent or complicate review.
 - Prefer deterministic transformations over stylistic churn.
