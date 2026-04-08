@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Refactoring"
+  short_description: "Guide safe, incremental code refactoring"
+  default_prompt: "Use $code-refactoring to plan and execute safe, test-first refactors."
